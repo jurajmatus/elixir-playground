@@ -1,6 +1,4 @@
 defmodule ElixirPlayground.Application do
-  # See https://hexdocs.pm/elixir/Application.html
-  # for more information on OTP Applications
   @moduledoc false
 
   use Application
@@ -8,12 +6,8 @@ defmodule ElixirPlayground.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: ElixirPlayground.Worker.start_link(arg)
-      # {ElixirPlayground.Worker, arg}
+      {Task.Supervisor, name: ElixirPlayground.TaskSupervisor}
     ]
-
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: ElixirPlayground.Supervisor]
     Supervisor.start_link(children, opts)
   end

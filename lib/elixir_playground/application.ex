@@ -6,7 +6,8 @@ defmodule ElixirPlayground.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      {Task.Supervisor, name: ElixirPlayground.TaskSupervisor}
+      {Task.Supervisor, name: ElixirPlayground.TaskSupervisor},
+      {GlobalMap, []}
     ]
     opts = [strategy: :one_for_one, name: ElixirPlayground.Supervisor]
     Supervisor.start_link(children, opts)
